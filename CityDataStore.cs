@@ -15,7 +15,7 @@ namespace CityInfo.Api
       Cities = new List<City>()
       {
         new City() { 
-          Id = 0,
+          Id = 1,
           Name = "Antwerp", 
           Description = "European place",
           PointsOfInterest = new List<PointOfInterest>()
@@ -35,7 +35,7 @@ namespace CityInfo.Api
           } 
         },
         new City() { 
-          Id = 1, Name = "Boston", Description = "All american place",
+          Id = 2, Name = "Boston", Description = "All american place",
           PointsOfInterest = new List<PointOfInterest>()
           {
             new PointOfInterest() 
@@ -53,7 +53,7 @@ namespace CityInfo.Api
           }
         },
         new City() { 
-          Id = 2, Name = "Austin", Description = "Texas place",
+          Id = 3, Name = "Austin", Description = "Texas place",
           PointsOfInterest = new List<PointOfInterest>()
           {
             new PointOfInterest() 

@@ -1,7 +1,8 @@
 
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using CityInfo.Api.Models;
 
 namespace CityInfo.Api.Controllers
@@ -49,11 +50,26 @@ namespace CityInfo.Api.Controllers
     public IActionResult CreatePointOfInterest(int cityId,
       [FromBody] PointOfInterestForCreation poiData)
     {
+
+      if(poiData.Description == poiData.Name)
+      {
+        ModelState.AddModelError(
+          "Description",
+          "The provided description should not match the name."
+        );
+      }
+
+
       // handled by ApiController attribute (magic)
       // if (poiData == null)
       // {
       //   return BadRequest();
       // }
+      // handled by ApiController attribute (magic)
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
       var city = CityDataStore.Current.Cities
         .FirstOrDefault(c => c.Id == cityId);
       if (city == null)
@@ -75,5 +91,47 @@ namespace CityInfo.Api.Controllers
         new { cityId, id = nextPoi.Id }, nextPoi);
     }
 
+    [HttpPut("{id}")]
+    public IActionResult UpdatePointOfInterest(int cityId, int id,
+      [FromBody] PointOfInterestForUpdate poiData)
+    {
+      if(poiData.Description == poiData.Name)
+      {
+        ModelState.AddModelError(
+          "Description",
+          "The provided description should not match the name."
+        );
+      }
+
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+
+      var city = CityDataStore.Current.Cities
+        .FirstOrDefault(c => c.Id == cityId);
+      if (city == null)
+      {
+        return NotFound();
+      }
+
+      var pointOfInterest = city.PointsOfInterest
+        .FirstOrDefault(p => p.Id == id);
+      if (pointOfInterest == null)
+      {
+        return NotFound();
+      }
+
+      pointOfInterest.Name = poiData.Name;
+      pointOfInterest.Description = poiData.Name;
+
+      return NoContent();
+    }
+
+    [HttpPatch]
+    public IActionResult PatchUpdatePointOfInterest()
+    {
+      return NotFound();
+    }
   }
 }
