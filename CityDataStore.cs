@@ -16,8 +16,8 @@ namespace CityInfo.Api
       {
         new City() { 
           Id = 1,
-          Name = "Antwerp", 
-          Description = "European place",
+          Name = "New York", 
+          Description = "It's basically Jersey",
           PointsOfInterest = new List<PointOfInterest>()
           {
             new PointOfInterest() 
