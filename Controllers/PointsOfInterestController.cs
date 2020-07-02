@@ -158,6 +158,21 @@ namespace CityInfo.Api.Controllers
       {
         return BadRequest(ModelState);
       }
+
+      if (pointOfInterestToPatch.Description == pointOfInterestToPatch.Name)
+      {
+        ModelState.AddModelError(
+          "Description",
+          "The provided description should be different from the name."
+        );
+      }
+
+      var valid = TryValidateModel(pointOfInterestToPatch);
+      if (!valid)
+      {
+        return BadRequest(ModelState);
+      }
+
       
       pointOfInterest.Name = pointOfInterestToPatch.Name;
       pointOfInterest.Description = pointOfInterestToPatch.Description;
