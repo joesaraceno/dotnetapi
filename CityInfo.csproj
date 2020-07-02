@@ -7,6 +7,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.5" />
+    <PackageReference Include="NLog.Web.AspNetcore" Version="4.9.2" />
+    <!-- <PackageReference Include="NLog" Version="4.6.7" /> -->
+
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="nlog.config" CopyToOutputDirectory="CopyIfNewer" />
   </ItemGroup>
 
 

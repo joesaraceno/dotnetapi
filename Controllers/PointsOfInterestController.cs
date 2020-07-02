@@ -1,8 +1,10 @@
 
+using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.JsonPatch;
 using CityInfo.Api.Models;
+using Microsoft.Extensions.Logging;
 
 namespace CityInfo.Api.Controllers
 {
@@ -10,17 +12,34 @@ namespace CityInfo.Api.Controllers
   [Route("api/cities/{cityId}/pointsofinterest")]
   public class PointsOfInterestController : ControllerBase 
   {
+    private readonly ILogger<PointsOfInterestController> _logger;
+
+    public PointsOfInterestController(ILogger<PointsOfInterestController> logger)
+    {
+      _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+    }
+
     [HttpGet]
     public IActionResult GetPointsOfInterest(int cityId) 
     {
-      var city = CityDataStore.Current.Cities
-        .FirstOrDefault(c => c.Id == cityId);
-      
-      if (city == null)
+      try 
       {
-        return NotFound();
+        throw new Exception("exxxxxxx");
+        var city = CityDataStore.Current.Cities
+          .FirstOrDefault(c => c.Id == cityId);
+        
+        if (city == null)
+        {
+          _logger.LogInformation($"City with id: {cityId} not found when accessing points of interest.");
+          return NotFound();
+        }
+        return Ok(city.PointsOfInterest);
       }
-      return Ok(city.PointsOfInterest);
+      catch (Exception ex)
+      {
+        _logger.LogCritical($"Error occured while getting points of interest for city with id: {cityId}", ex);
+        return StatusCode(500, "A problem occurred while handling this request");
+      }
 
     }
 
