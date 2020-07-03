@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
+using CityInfo.Api.Services;
 
 namespace CityInfo
 {
     public class Startup
     {
         public Startup(IConfiguration configuration)
-        {
+        {   
             Configuration = configuration;
         }
 
@@ -21,6 +21,8 @@ namespace CityInfo
         {
             services.AddMvc(option => option.EnableEndpointRouting = false)
               .AddNewtonsoftJson();
+
+            services.AddTransient<IMailService, LocalMailService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
