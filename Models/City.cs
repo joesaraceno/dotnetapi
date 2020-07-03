@@ -2,7 +2,7 @@ using System.Collections.Generic;
 namespace CityInfo.Api.Models
 
 {
-  public class City
+  public class CityDTO
   {
     public int Id { get; set; }
     public string Name { get; set; }
@@ -12,7 +12,7 @@ namespace CityInfo.Api.Models
         return PointsOfInterest.Count;
       }
     }
-    public ICollection<PointOfInterest> PointsOfInterest { get; set; } 
-      = new List<PointOfInterest>();
+    public ICollection<PointOfInterestDTO> PointsOfInterest { get; set; } 
+      = new List<PointOfInterestDTO>();
   }
 }

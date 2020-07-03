@@ -69,7 +69,7 @@ namespace CityInfo.Api.Controllers
     }
     [HttpPost]
     public IActionResult CreatePointOfInterest(int cityId,
-      [FromBody] PointOfInterestForCreation poiData)
+      [FromBody] PointOfInterestForCreationDTO poiData)
     {
 
       if(poiData.Description == poiData.Name)
@@ -100,7 +100,7 @@ namespace CityInfo.Api.Controllers
       var maxPoiId = CityDataStore.Current.Cities
         .SelectMany(c => c.PointsOfInterest).Max(p => p.Id);
 
-      var nextPoi = new PointOfInterest()
+      var nextPoi = new PointOfInterestDTO()
       {
         Id = ++maxPoiId,
         Name = poiData.Name,
@@ -114,7 +114,7 @@ namespace CityInfo.Api.Controllers
 
     [HttpPut("{id}")]
     public IActionResult UpdatePointOfInterest(int cityId, int id,
-      [FromBody] PointOfInterestForUpdate poiData)
+      [FromBody] PointOfInterestForUpdateDTO poiData)
     {
       if(poiData.Description == poiData.Name)
       {
@@ -151,7 +151,7 @@ namespace CityInfo.Api.Controllers
 
     [HttpPatch("{id}")]
     public IActionResult PartiallyUpdatePointOfInterest(int cityId, int id,
-      [FromBody] JsonPatchDocument<PointOfInterestForUpdate> patchDoc)
+      [FromBody] JsonPatchDocument<PointOfInterestForUpdateDTO> patchDoc)
     {
       var city = CityDataStore.Current.Cities
         .FirstOrDefault(city=> city.Id == cityId);
@@ -168,7 +168,7 @@ namespace CityInfo.Api.Controllers
         return NotFound();
       }
 
-      var pointOfInterestToPatch = new PointOfInterestForUpdate()
+      var pointOfInterestToPatch = new PointOfInterestForUpdateDTO()
       {
         Name = pointOfInterest.Name,
         Description = pointOfInterest.Description,

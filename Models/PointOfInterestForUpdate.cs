@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CityInfo.Api.Models
 {
-  public class PointOfInterestForUpdate
+  public class PointOfInterestForUpdateDTO
   {
     [MaxLength(50)][Required]
     public string Name { get; set; }

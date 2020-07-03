@@ -6,27 +6,27 @@ namespace CityInfo.Api
 {
   public class CityDataStore
   {
-    public List<City> Cities { get; set; }
+    public List<CityDTO> Cities { get; set; }
 
     public static CityDataStore Current { get; } = new CityDataStore();
 
     public CityDataStore()
     {
-      Cities = new List<City>()
+      Cities = new List<CityDTO>()
       {
-        new City() { 
+        new CityDTO() { 
           Id = 1,
           Name = "New York", 
           Description = "It's basically Jersey",
-          PointsOfInterest = new List<PointOfInterest>()
+          PointsOfInterest = new List<PointOfInterestDTO>()
           {
-            new PointOfInterest() 
+            new PointOfInterestDTO() 
             {
               Id = 1,
               Name = "Central Park",
               Description = "The most visited park in the united states"
             },
-            new PointOfInterest() 
+            new PointOfInterestDTO() 
             {
               Id = 2,
               Name = "Sears Tower",
@@ -34,17 +34,17 @@ namespace CityInfo.Api
             },
           } 
         },
-        new City() { 
+        new CityDTO() { 
           Id = 2, Name = "Boston", Description = "All american place",
-          PointsOfInterest = new List<PointOfInterest>()
+          PointsOfInterest = new List<PointOfInterestDTO>()
           {
-            new PointOfInterest() 
+            new PointOfInterestDTO() 
             {
               Id = 3,
               Name = "Harvard",
               Description = "This probably isn't even in Boston"
             },
-            new PointOfInterest() 
+            new PointOfInterestDTO() 
             {
               Id = 4,
               Name = "Donut Shop",
@@ -52,17 +52,17 @@ namespace CityInfo.Api
             },
           }
         },
-        new City() { 
+        new CityDTO() { 
           Id = 3, Name = "Austin", Description = "Texas place",
-          PointsOfInterest = new List<PointOfInterest>()
+          PointsOfInterest = new List<PointOfInterestDTO>()
           {
-            new PointOfInterest() 
+            new PointOfInterestDTO() 
             {
               Id = 5,
               Name = "Lafayette Square",
               Description = "It's more of a round"
             },
-            new PointOfInterest() 
+            new PointOfInterestDTO() 
             {
               Id = 6,
               Name = "Kennedy Assasination",
